@@ -1,12 +1,20 @@
 from pathlib import Path
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-v89ov*fgd5miqtnlo!b%wii0pi&*6ud33$qq8&w_u5n-(-rmec'
+SECRET_KEY = os.environ.get(
+    'SECRET_KEY',
+    'django-insecure-v89ov*fgd5miqtnlo!b%wii0pi&*6ud33$qq8&w_u5n-(-rmec'
+)
 
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    '.onrender.com',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -78,6 +86,8 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
